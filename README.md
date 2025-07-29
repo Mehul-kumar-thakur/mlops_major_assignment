@@ -59,7 +59,7 @@ docker build -t linear-regression-pipeline .
 
 # Run container
 docker run --rm linear-regression-pipeline
-🔄 CI/CD Pipeline
+ CI/CD Pipeline
 Job	Description	Dependency
 test suite	Runs pytest on the test module	—
 train and quantize	Executes training & quantization	test suite
@@ -67,3 +67,15 @@ build and test container	Builds Docker image and verifies prediction	train and q
 
 
 Triggered on every push to main.
+
+```
+---
+```
+R2 Score: 0.6201853253087715
+MSE: 0.49779099525116177
+
+## Sample Prediction:
+Sample predictions: [4.13945094 3.9882056  3.68329939 3.2411463  2.4119279 ]
+
+```
+---
