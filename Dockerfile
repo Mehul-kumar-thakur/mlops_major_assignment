@@ -8,7 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy source and model
 COPY src/ ./src
-COPY model.joblib .
+COPY src/model.joblib .
 
 # Default command to run prediction
 CMD ["python", "src/predict.py"]
