@@ -9,16 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: '3.9'
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pytest
-          
+
       - name: Train model
         run: python src/train.py
 
@@ -30,12 +32,17 @@ jobs:
     needs: test-suite
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.10
+          python-version: '3.9'  # ✅ match earlier job for consistency
+
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
       - name: Run training & quantization
         run: |
           python src/train.py
@@ -46,7 +53,9 @@ jobs:
     needs: train-and-quantize
     steps:
       - uses: actions/checkout@v4
+
       - name: Build Docker image
         run: docker build -t mlops-linear .
+
       - name: Run Docker container
-        run: docker run mlops-linear
+        run: docker run --rm mlops-linear
